@@ -1,19 +1,44 @@
+import random
 import Board
 
-class Ships:
-    def __init__(self, size):
-        self.sizes = {'small': 4, 'medium': 3, 'large': 4, 'huge': 6}
+class Ship:
+    def __init__(self, boatSize, orientation, board, index):
+        #make sure to enforce that board is an object type Board ^
 
-        self.size = size
+        self.boatSize = boatSize
+        self.orientation = orientation #true for vertical
+        self.board = board
+        self.index = index
 
     def placeShip(self):
-        pass
+        self.checklimits()
+        
+        if self.orientation:
+            for cells in range(self.index[1], self.index[1] + self.boatSize):
+                self.board.matrix[self.index[0]][cells] = '#'
+            
+        else:
+            for cells in range(self.index[0], self.index[0] + self.boatSize):
+                self.board.matrix[cells][self.index[1]] = '#'
 
-    def drawShip(self):
-        pass
+    def checklimits(self): #only for walls
+        cell = self.board.CELL - 1
+        row = self.board.ROW - 1 
+
+        if self.orientation:
+            if (self.index[1] + (self.boatSize - 1) > row):
+                self.index[1] = self.index[1] - ((self.index[1] + self.boatSize - 1) - row)
+                print(self.index)
+        else:
+            if (self.index[0] + self.boatSize - 1 > cell):
+                self.index[0] = self.index[0] - ((self.index[1] + self.boatSize - 1) - row)
+                print(self.index)
 
 
-
+board = Board.Board(10,10)
+boat = Ship(5, False, board, [0,2])
+boat.placeShip()
+board.drawBoard()
 
 
 

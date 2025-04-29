@@ -1,7 +1,7 @@
 class Board:
-    def __init__(self):
-        self.ROW = 10
-        self.CELL = 10   
+    def __init__(self, row, cell):
+        self.ROW = row
+        self.CELL = cell
 
         self.matrix = [[0]*self.ROW for i in range(self.CELL)]
 
@@ -9,7 +9,7 @@ class Board:
         self.tagLetters = ['A','B','C','D','E','F','G','H','I','J']
         self.tagNumbers = list(range(1,self.ROW + 1))
 
-    def tagToIndex(self, tag):
+    def tagToIndex(self, tag): #fix this
         newIndex = [0,0]
         
         newIndex[0] = self.tagLetters.index(tag[0], 0, len(self.tagLetters))
@@ -20,8 +20,8 @@ class Board:
     def indexToTag(self, index):
         newTag = [0,0]
 
-        newTag[0] = self.tagLetters[index[0]]
-        newTag[1] = self.tagNumbers[index[0]]
+        newTag[0] = self.tagLetters[index[0] - 1]
+        newTag[1] = self.tagNumbers[index[0] - 1]
 
         return newTag
  
