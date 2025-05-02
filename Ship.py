@@ -43,15 +43,5 @@ class Ship:
                 self.index[1] = self.index[1] - ((self.index[1] + self.boatSize - 1) - row)
         else:
             if (self.index[0] + self.boatSize - 1 > cell):
-                self.index[0] = self.index[0] - ((self.index[1] + self.boatSize - 1) - row)
-
-    def shoot(self, tag): #shoot algorithm
-        index = self.board.tagToIndex(tag)
-
-        if self.board.matrix[index] == '#':
-            self.board.matrix[index] = 'X'
-            print("\n>>> HIT!")
-
-
-
+                self.index[0] = self.index[0] - ((self.index[0] + self.boatSize - 1) - row)
 

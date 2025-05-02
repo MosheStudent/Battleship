@@ -12,8 +12,10 @@ class Board:
     def tagToIndex(self, tag): #fix this
         newIndex = [0,0]
         
-        newIndex[0] = self.tagLetters[tag[0]]
-        newIndex[1] = self.tagNumbers[tag[1]]
+        newIndex[0] = tag[0] - 1
+        
+        letter = tag[1]
+        newIndex[1] = self.tagLetters.index(letter)
 
         return newIndex
     

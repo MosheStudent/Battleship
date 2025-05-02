@@ -9,11 +9,15 @@ class Fleet: #creates all the boats on the board
 
         self.board = board
 
+
     def place_boats(self):
         for size in self.sizes:
-            index = [0,0]
-            index[1] = int(input("\n>>> Enter index X: "))
+            index = ['',0]
+            
+            index[1] = input("\n>>> Enter index X: ")
             index[0] = int(input("\n>>> Enter index Y: ")) 
+
+            index = self.board.tagToIndex(index)
 
             isHorizontal = input("\n>>> Horizontal?(Y/N): ")
 
@@ -29,15 +33,16 @@ class Fleet: #creates all the boats on the board
 
 
             while self.isCollide(newShip):
-                print("\n>>> Enter a valid index!!!\n")
+                print("\n>>> A SHIP HAS ALREADY BEEN PLACED THERE!!!\n")
 
-                index[1] = int(input("\n>>> Enter index X: "))
+                index[1] = input("\n>>> Enter index X: ")
                 index[0] = int(input("\n>>> Enter index Y: ")) 
 
+                index = self.board.tagToIndex(index)
+
                 newShip = Ship.Ship(size, isHorizontal, self.board, index)
-
                 newShip.checklimits()
-
+             
 
             self.ships.append(newShip)
             newShip.placeShip()
@@ -62,6 +67,8 @@ class Fleet: #creates all the boats on the board
             index[0] += 1
 
     def shoot(self, tag): #shoot algorithm
+        #work on this:
+        
         index = self.board.tagToIndex(tag)
 
         if self.board.matrix[index] == '#':
